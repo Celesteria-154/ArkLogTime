@@ -12,7 +12,7 @@ def Timecount(join, left):
 if os.path.isdir('./logFile') == False:
     os.mkdir('./logFile')
 
-# logFileに入ってるファイル名の取得、リスト化
+# logFileに入ってるファイル名の取得、リスト初期化
 path_List = glob.glob('./logFile/*')
 Namelist = []
 Player = []
@@ -45,7 +45,7 @@ for Name in Namelist:
                     PlayerNum = Player.index(PName)
                     joinTimeList[PlayerNum] = join
                     incheck[PlayerNum] = 1
-                # 格納されていれば格納して続行
+                # 格納されていなければ格納して続行
                 else:
                     Player.append(PName)
                     TimeList.append(datetime.timedelta(seconds=0))
@@ -70,7 +70,7 @@ for Name in Namelist:
         for check in incheck:
             if incheck[PlayerNum] == 0:
                 PlayerNum += 1
-            # またいだ場合は24:00:00に退出し、00:00:00に入出した扱い
+            # またいだ場合は23:59:59に退出し、00:00:00に入出した扱い
             else:
                 left = '23:59:59'
                 TimeList[PlayerNum] += Timecount(join, left)
