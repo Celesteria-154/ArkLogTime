@@ -4,6 +4,8 @@ Arkのプレイ時間をRCONログファイルから算出するプログラム�
 
 ログの入退出を判定して計算しているので、RCONを途中で閉じたりしていると計算が正しくなくなるので注意してください。
 
+気が向いたらきれいにかきなおします
+
 This program calculates Ark's login time from RCON log files.
 I created this for private use, but I believe it will work in any environment.
 
