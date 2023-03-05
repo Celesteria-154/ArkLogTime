@@ -22,6 +22,8 @@ Note that the calculations are based on judging log entry and exit, so if you cl
 
    Running `Ark_RCONLog_inTime.py` will display the results of the calculation.
 
+![image](File/run.png)
+
 # 注意(attention)
 Steam名を変更して入室すると、入出時は以前の名前でログに記録され退出時新しい名前で退出されるのでエラーを出します。
 解決法としてログファイルを直接書き換えると正常に計算できるようになります。
