@@ -44,3 +44,8 @@ We assume no responsibility whatsoever for any damage, loss, or malfunction resu
 ASM v1.1.439.1   
 Ark v357.3   
 UnicodeRcon v1.2   
+
+# 変更履歴(ChangeLog)  
+
+1.0.1 - コードが適当すぎたのを整理
+1.0 - 初版
