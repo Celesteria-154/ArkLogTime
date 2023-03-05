@@ -13,6 +13,7 @@ if os.path.isdir('./logFile') == False:
     os.mkdir('./logFile')
 
 # logFileに入ってるファイル名の取得、リスト初期化
+# 多次元化はめんどくs
 path_List = glob.glob('./logFile/*')
 Namelist = []
 Player = []
@@ -20,13 +21,10 @@ joinTimeList = []
 TimeList = []
 incheck = []
 
-j = 0
-
 for i in path_List:
     file = os.path.basename(i)
     Namelist.append(i)
 
-i = 0
 for Name in Namelist:
     with open(Name, encoding="utf-8") as f:
         for line in f:
@@ -44,13 +42,13 @@ for Name in Namelist:
                 if PName in Player:
                     PlayerNum = Player.index(PName)
                     joinTimeList[PlayerNum] = join
-                    incheck[PlayerNum] = 1
+                    incheck[PlayerNum] = True
                 # 格納されていなければ格納して続行
                 else:
                     Player.append(PName)
                     TimeList.append(datetime.timedelta(seconds=0))
                     joinTimeList.append(join)
-                    incheck.append('1')
+                    incheck.append('True')
 
             # 退出時間取得
             if 'left' in line:
@@ -63,19 +61,18 @@ for Name in Namelist:
 
                 PlayerNum = Player.index(PName)
                 TimeList[PlayerNum] += Timecount(joinTimeList[PlayerNum], left)
-                incheck[PlayerNum] = 0
+                incheck[PlayerNum] = False
 
         # 日付をまたいだ場合の処理
         PlayerNum = 0
         for check in incheck:
-            if incheck[PlayerNum] == 0:
+            if check == False:
                 PlayerNum += 1
             # またいだ場合は23:59:59に退出し、00:00:00に入出した扱い
             else:
                 left = '23:59:59'
                 TimeList[PlayerNum] += Timecount(join, left)
                 joinTimeList[PlayerNum] = '00:00:00'
-                incheck[PlayerNum] = 1
                 PlayerNum += 1
 
 # Output
@@ -83,7 +80,7 @@ i = 0
 for Players in Player:
     totaltime = TimeList[i]
 
-    print(f'{Player[i]} : {totaltime}')
+    print(f'{Players} : {totaltime}')
     i += 1
 
 os.system('PAUSE')
