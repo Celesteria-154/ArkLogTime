@@ -3,6 +3,8 @@ import glob
 import datetime
 
 def Timecount(join, left):
+
+    #時間をdatetime型に変換後、経過時間を返す
     djoin = datetime.datetime.strptime(join, '%H:%M:%S')
     dleft = datetime.datetime.strptime(left, '%H:%M:%S')
     dtime = dleft - djoin
@@ -29,11 +31,13 @@ for Name in Namelist:
     with open(Name, encoding="utf-8") as f:
         for line in f:
 
-            # 参加時間取得
+            # 参加時
             if 'joined' in line:
+
+                # 参加時間
                 join = line[0:8]
 
-                # 参加者取得
+                # 参加者
                 start = line.index("] ") + 2
                 end = line.index(" joined")
                 PName = line[start:end]
@@ -50,7 +54,7 @@ for Name in Namelist:
                     joinTimeList.append(join)
                     incheck.append(True)
 
-            # 退出時間取得
+            # 退出時
             if 'left' in line:
                 left = line[0:8]
 
