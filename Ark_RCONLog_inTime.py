@@ -48,7 +48,7 @@ for Name in Namelist:
                     Player.append(PName)
                     TimeList.append(datetime.timedelta(seconds=0))
                     joinTimeList.append(join)
-                    incheck.append('True')
+                    incheck.append(True)
 
             # 退出時間取得
             if 'left' in line:
@@ -66,21 +66,17 @@ for Name in Namelist:
         # 日付をまたいだ場合の処理
         PlayerNum = 0
         for check in incheck:
-            if check == False:
-                PlayerNum += 1
-            # またいだ場合は23:59:59に退出し、00:00:00に入出した扱い
-            else:
+            if check == True:
+                # またいだ場合は23:59:59に退出し、00:00:00に入出した扱い
                 left = '23:59:59'
                 TimeList[PlayerNum] += Timecount(join, left)
                 joinTimeList[PlayerNum] = '00:00:00'
-                PlayerNum += 1
+            PlayerNum += 1
 
 # Output
-i = 0
 for Players in Player:
-    totaltime = TimeList[i]
-
+    PlayerNum = Player.index(Players)
+    totaltime = TimeList[PlayerNum]
     print(f'{Players} : {totaltime}')
-    i += 1
 
 os.system('PAUSE')
